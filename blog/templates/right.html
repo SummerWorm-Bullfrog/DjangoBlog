@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--分类-->
+<div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+        <ul class="category-list">
+            {% for cate_post in cate_posts %}
+                <li class="category-list-item">
+                    <a class="category-list-link" href="/post/cate/{{ cate_post.category }}">{{ cate_post.category__cname }}</a>
+                    <span class="category-list-count">{{ cate_post.c }}</span>
+                </li>
+            {% endfor %}
+      </ul>
+    </div>
+</div>
+
+<!--归档-->
+<div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+        <ul class="archive-list">
+            {% for data in datas  %}
+                <li class="archive-list-item">
+                    <a class="archive-list-link" href="/post/date/{{ data.0|date:'Y' }}/{{ data.0|date:'m' }}"> {{ data.0 | date:"Y年m月" }} </a>
+                    <span class="archive-list-count">{{ data.1 }}</span>
+                </li>
+            {% endfor %}
+       </ul>
+    </div>
+</div>
+
+<div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+        <ul>
+            {% for r in recent%}
+                <li>
+                    <a href="/post/content/{{ r.id }}" target="_blank">{{ r.title }}</a>
+                </li>
+            {% endfor %}
+
+
+        </ul>
+    </div>
+</div>
+<div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+        <ul>
+            <li>
+                <a href="" target="_blank"></a>
+            </li>
+            <li>
+                <a href="" target="_blank"></a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

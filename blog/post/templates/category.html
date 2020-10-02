@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block main %}
+    <div id="main">
+        <div class="archives">
+           <article class="archive-article archive-type-post">
+               {% for cate in cates %}
+                   <div class="archive-article-inner">
+                       <header class="archive-article-header">
+                           <a href="#" class="archive-article-date">
+                               <time>{{ cate.created | date:"Y-m"}}</time>
+                           </a>
+
+                           <h1 itemprop="name">
+                               <a class="archive-article-title" target="_blank" href="/post/content/{{ cate.id }}">{{ cate.title }}</a>
+                           </h1>
+                       </header>
+                   </div>
+                   {% empty %}
+                    没有搜索到结果
+               {% endfor %}
+            </article>
+        </div>
+    </div>
+{% endblock main %}

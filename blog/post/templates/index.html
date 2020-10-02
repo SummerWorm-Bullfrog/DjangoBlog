@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block main %}
+{% for post in posts %}
+    <article class="article article-type-post">
+        <div class="article-meta">
+            <a class="article-date">
+                <time>{{ post.created | date:'Y年m月d日 H:i:s' }}</time>
+            </a>
+            <div class="article-category">
+                <a class="article-category-link" href="http://hello123.pythonanywhere.com/#" target="_blank">{{ post.category.cname }}</a>
+            </div>
+        </div>
+        <div class="article-inner">
+            <header class="article-header">
+                <h1 itemprop="name">
+                    <a class="article-title" href="http://hello123.pythonanywhere.com/#" target="_blank">{{ post.title }}</a>
+                </h1>
+            </header>
+            <div class="article-entry" itemprop="articleBody">
+                <h2>前言</h2>
+                <hr>
+                {{ post.desc }}
+
+                <p class="article-more-link">
+                    <a href="/post/content/{{ post.id}}" target="_blank">阅读全文</a>
+                </p>
+            </div>
+            <footer class="article-footer">
+{#                <a data-url="存放文章的url" class="article-share-link">分享</a>#}
+                <ul class="article-tag-list">
+                    {% for t in post.tag.all %}
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="http://hello123.pythonanywhere.com/#">{{ t.tname }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </footer>
+        </div>
+    </article>
+
+{% endfor %}
+    <nav id="page-nav">
+        {% if posts.has_previous %}
+            <a class="extend prev" rel="next" href="/post/page/{{ posts.previous_page_number }}">Pre »</a>
+        {% endif %}
+
+        {% for page in page_range %}
+
+            {% if page == posts.number %}
+                <span class="page-number current">{{ page }}</span>
+                {% else %}
+                <a class="page-number" href="/post/page/{{ page }}">{{ page }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if posts.has_next %}
+            <a class="extend next" rel="next" href="/post/page/{{ posts.next_page_number }}">Next »</a>
+        {% endif %}
+    </nav>
+{% endblock %}
